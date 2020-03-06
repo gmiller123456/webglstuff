@@ -1,0 +1,14 @@
+Introduction to stellar photometry
+https://www.astro.keele.ac.uk/astrolab/manual/week04.pdf
+-Explains how to measure the flux of a star image
+
+A Physically-Based Night Sky Model
+https://graphics.stanford.edu/~henrik/papers/nightsky/nightsky.pdf
+-Many applications of night sky drawing are explored
+
+-Discussion of drawing (better) stars for Celestia application
+https://celestia.space/forum/viewtopic.php?f=10&t=16031&__cf_chl_jschl_tk__=e76c388280cd055f1af0cb09d86c6f0870225ec2-1578285051-0-AdqScWkId0JjSf6UtFUCRi1UbOdRA6bZzQUCaacFNauW_bIjLbmtAXRvpYxeevWOohIAkIFPtNPsLbL59UvTGPrlzLYIPIvrZK6oV1YDnE82VxeKjoSiQbDoarplefGc900g-y9H99hBbth7EJ1fBCPkM7cq3JLTO6PbkADtrKH2NSqdIBcEA3Rgq9EYbstz1yi6x0vAwBM4tmiiZDyk-dLBdJNVC0B1lQat7onByFfECM20RDNrT2XiIB7Bi27pmOuQPYa5-rci32I0Wo2HXzZi41E3Qnwmm0h7U8ApKMBZi3UA9FszDqiqE288HqZzcQ
+
+Image of Orion
+http://images.astronet.ru/pubd/2003/02/07/0001186521/orion_spinelli_c1.jpg
+

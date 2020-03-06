@@ -1,0 +1,68 @@
+From:
+https://celestia.space/forum/viewtopic.php?f=10&t=16031
+
+--Vertex shader
+
+attribute magnitude;
+uniform vec2 viewportSize;
+varying vec2 pointCenter;
+varying vec4 starColor;
+varying float brightness;
+uniform float limitingMagnitude;
+uniform float saturationMagnitude;
+uniform float s2;
+uniform float Gs2;
+uniform float G;
+uniform float exposure;
+const float thresholdBrightness = 1.0 / 512.0;
+
+void main()
+{
+    vec4 projPosition = gl_ModelViewProjectionMatrix * gl_Vertex;
+
+    // Perspective projection to get the star position in normalized device coordinates
+    vec2 ndcPosition = projPosition.xy / projectedPosition.w;
+
+    // Convert to viewport coordinates (the same coordinate system as the gl_FragCoord register)
+    pointCenter = (ndcPosition * 0.5 + vec2(0.5, 0.5)) * viewportSize;
+
+    // Get the star color from the gl_Color attribute
+    color = gl_Color;
+    brightness = pow(2.512, (limitingMagnitude - saturationMagnitude) * (saturationMagnitude - magnitude));
+
+    // Calculate the minimum size of a point large enough to contain both the glare function and PSF; these
+    // functions are both infinite in extent, but we can clip them when they fall off to an indiscernable level
+    float r2 = -log(thresholdBrightness / brightness) * 2.0 * s2;
+    float rG2 = -log(thresholdBrightness / (glareBrightness * brightness)) * 2.0 * Gs2;
+    gl_PointSize = 2.0 * sqrt(max(r2, rG2));
+
+    gl_Position = projectedPosition;
+}
+
+
+--Pixel shader
+
+varying vec2 pointCenter;
+varying vec4 color;
+uniform float sigma2;
+uniform float glareSigma2;
+uniform float glareBrightness;
+varying float brightness;
+
+void main()
+{
+    // gl_FragCoord contains the position of the pixel center in viewport coordinates. Compute
+    // the distance to the center of the star.
+    vec2 offset = gl_FragCoord.xy - pointCenter;
+    float r2 = dot(offset, offset);
+    float b = exp(-r2 / (2.0 * sigma2));
+    b += glareBrightness * exp(-r2 / (2.0 * glareSigma2));
+    gl_FragColor = vec4(linearToSRGB(b * color.rgb * brightness), 1.0)"
+}
+
+vec3 linearToSRGB(vec3 color)
+{
+    vec3 linearPart = 12.92 * color;
+    vec3 nonlinearPart = (1.0 + 0.055) * pow(color, vec3(1.0 / 2.4)) - vec3(0.055);
+    return mix(linearPart, nonlinearPart, color < vec3(0.0031308));
+}

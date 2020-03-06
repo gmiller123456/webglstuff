@@ -1,0 +1,19 @@
+<script src="../messier.json"></script>
+
+<div id=t></div>
+<script>
+console.log(messier);
+
+function printIds(lst){
+	var d=document.getElementById("t");
+	for(var i=0;i<messier.features.length;i++){
+		//var ra=messier.features[i].geometry.coordinates[0]*0.0174533;
+		//var dec=messier.features[i].geometry.coordinates[1]*0.0174533;
+		t.innerHTML+='"'+messier.features[i].properties.cl+'",';
+		//t.innerHTML+=messier.features[i].properties.mag+',';
+
+	}
+}
+
+printIds();
+</script>

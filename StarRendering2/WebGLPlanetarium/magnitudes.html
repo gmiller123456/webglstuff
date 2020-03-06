@@ -1,0 +1,70 @@
+<html><body> 
+
+<canvas id='starcanvas' height=500 width=1000 style="background:#050522"></canvas>
+<canvas id='mycanvas' height=200 width=500 style="background:black"></canvas>
+<script src="hipparcos2.js"></script>
+
+<script>
+
+drawStar2(1,-2);
+drawStar2(2,-1);
+drawStar2(3,0);
+drawStar2(4,1);
+drawStar2(5,2);
+drawStar2(6,3);
+drawStar2(7,4);
+drawStar2(8,5);
+
+drawStars();
+console.log("Done");
+
+function drawStars(){
+	for(let i=0;i<hip.length;i++){
+		const index=i*4;
+		if(hip[index+2]<5){
+			drawStar(hip[index],hip[index+1],hip[index+2],hip[index+3]);
+		}
+	}
+}
+
+function drawStar(ra,dec,mag,bv){
+	let dia=Math.pow(2.5,5-mag)/30;
+	let y=1-(dec+3.141592/2)/Math.PI;
+	let x=ra/(3.141592*2.0);
+	var c = document.getElementById("starcanvas");
+	var ctx = c.getContext("2d");
+	ctx.beginPath();
+	ctx.fillStyle="white"
+	if(dia<0){
+		console.log("Not drawing negative arc");
+	} else {
+		ctx.arc(x*c.width, y*c.height, dia, 0, 2 * Math.PI);
+	}
+	console.log(y*c.height);
+	ctx.fill();
+
+}
+
+function drawStar2(pos,mag){
+
+	dia=5-mag;
+	xpos=pos*50+25;
+
+	var c = document.getElementById("mycanvas");
+	var ctx = c.getContext("2d");
+	ctx.beginPath();
+	ctx.fillStyle="white"
+	ctx.arc(xpos, 75, dia, 0, 2 * Math.PI);
+	ctx.fill();
+
+	console.log(dia/10);
+
+}
+
+</script>
+
+
+
+
+
+</body></html>
